@@ -27,12 +27,13 @@ RUN sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/g'  /etc/ss
 # Install My Repo
 RUN git clone https://github.com/mousezero/ubuntuInstallVimTmuxPowerline.git mouseZero
 
+RUN rm /bin/sh && ln -s /bin/bash /bin/sh
+
+
 RUN cd mouseZero && \
-    ./.installPrograms.sh
-    
-# RUN rm -r mouseZero && git clone https://github.com/mousezero/ubuntuInstallVimTmuxPowerline.git mouseZero
-    
-RUN ./.installSPF13.sh
+    ./.installPrograms.sh && \
+    ./.installSPF13.sh && \
+    ./.installConfig.sh
 
 # Get ready for and Switch User to "Pair"
 RUN chown pair:pair -R ~/
